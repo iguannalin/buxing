@@ -6,25 +6,27 @@ window.addEventListener("load", () => {
   }
 
   const container = document.getElementById("container");
-  function display(r) {
-    const node = document.createElement("a");
-    node.innerText = r;
-    let s = 0;
-    let delta = 0.1;
-    setInterval(() => {
-      if (s > 1.5) delta = -0.05;
-      else if (s <= 0.8) delta = 0.05;
-      s += delta;
-      node.style.transform = `scale(${s}, 2)`;
-    }, getRandomInt(30,100));
-    node.style.top = getRandomInt(50, window.innerHeight-50)+"px";
-    node.style.left = getRandomInt(50, window.innerWidth-50)+"px";
-    container.appendChild(node);
+  function makeCharacter(radicals) {
+    let sc = 0;
+    const character = document.createElement("div");
+    for (let _ = 0; _ < 2; _++) {
+      let ch = radicals[getRandomInt(0, radicals.length)];
+      for (let __ = 0; __ < 1; __++) {
+        const node = document.createElement("p");
+        node.innerText = ch;
+        console.log({sc});
+        node.style.paddingRight = (sc*40) + "px";
+        sc = Math.max(0.1, Math.random());
+        node.style.transform = `scale(${sc},1)`;
+        character.appendChild(node);
+      }
+    }
+    container.appendChild(character);
   }
 
-  fetch("https://annaylin.com/100-days/sunmoonsky/radicals.json").then((r) => r.json()).then((radicals) => {
-    for (let i = 0; i < Math.max(window.innerHeight, window.innerWidth) / 16; i++) {
-      display(radicals[getRandomInt(0, radicals.length)]);
+  fetch("https://annaylin.com/100-days/sunmoonsky/radicals.json").then((r) => r.json()).then((r) => {
+    for (let _ = 0; _ < 10; _++) {
+      makeCharacter(r);
     }
   })
 });
