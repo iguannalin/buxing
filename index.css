@@ -4,31 +4,23 @@
   --shadow-color: #858ebc;
 }
 
-html {
-  display: block;
-  width: 100%;
-}
-
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
+  width: 100vw;
   height: 100vh;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
   text-shadow: var(--shadow-color) -2px 2px 8px;
-  writing-mode: vertical-rl;
 }
 
 #container {
-  display: flex;
-  flex-flow: column wrap;
+  /* writing-mode: vertical-rl; */
 }
 
 p {
-  display: flex;
-  justify-content: center;
-  font-size: 48px;
-  writing-mode: vertical-rl;
+  position: absolute;
+  font-size: 24px;
+}
+
+span {
+  position: absolute;
 }

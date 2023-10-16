@@ -5,28 +5,39 @@ window.addEventListener("load", () => {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
   }
 
+  let px = 100;
+  let py = 300;
+  let charW = 40;
+  let charH = 18;
+
   const container = document.getElementById("container");
   function makeCharacter(radicals) {
-    let sc = 0;
-    const character = document.createElement("tr");
-    const td = document.createElement("td");
+    let sc = Math.min(Math.max(0.3, Math.random()), 0.6);
+    const character = document.createElement("p");
     for (let _ = 0; _ < 2; _++) {
       let ch = radicals[getRandomInt(0, radicals.length)];
-      for (let __ = 0; __ < 1; __++) {
-        const node = document.createElement("span");
-        node.innerText = ch;
-        node.style.paddingRight = (sc*45) + "px";
-        sc = Math.max(0.1, Math.random());
+      const node = document.createElement("span");
+      node.innerText = ch;
+      if (_ > 0) {
+        node.style.paddingLeft = (sc*25) + "px";
+        node.style.transform = `scale(${1-sc},1)`;
+      } else {
         node.style.transform = `scale(${sc},1)`;
-        td.appendChild(node);
       }
+      character.appendChild(node);
+      character.style.left = px+"px";
+      character.style.top = py+"px";
+      py += charH;
     }
-    character.appendChild(td);
+    if (py >= window.innerHeight-300) {
+      px += charW;
+      py = 300;
+    }
     container.appendChild(character);
   }
 
   fetch("https://annaylin.com/100-days/sunmoonsky/radicals.json").then((r) => r.json()).then((r) => {
-    for (let _ = 0; _ < 10; _++) {
+    for (let _ = 0; _ < 48; _++) {
       makeCharacter(r);
     }
   })
