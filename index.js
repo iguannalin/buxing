@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
   let charH = 18;
 
   const container = document.getElementById("container");
-  function makeCharacter(radicals) {
+  function makeCharacter(radicals, last = false) {
     let sc = Math.min(Math.max(0.3, Math.random()), 0.6);
     const character = document.createElement("p");
     for (let _ = 0; _ < 2; _++) {
@@ -33,12 +33,15 @@ window.addEventListener("load", () => {
       px += charW;
       py = 300;
     }
+    if (Math.random() > 0.90) character.style.visibility = "hidden";
+    else if (Math.random() > 0.95) character.innerHTML = "&nbsp;&nbsp;，";
+    else if (last) character.innerHTML = "&nbsp;&nbsp;。";
     container.appendChild(character);
   }
 
   fetch("https://annaylin.com/100-days/sunmoonsky/radicals.json").then((r) => r.json()).then((r) => {
     for (let _ = 0; _ < 48; _++) {
-      makeCharacter(r);
+      makeCharacter(r, _==7);
     }
   })
 });
