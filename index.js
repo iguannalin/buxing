@@ -7,8 +7,8 @@ window.addEventListener("load", () => {
 
   const ww = window.innerWidth;
   const hh = window.innerHeight;
-  let px = 100;
-  let py = 300;
+  let px = (ww/5);
+  let py = (hh/5);
   let charW = 40;
   let charH = 18;
   let afterComma = false;
@@ -35,20 +35,19 @@ window.addEventListener("load", () => {
       character.style.top = py+"px";
       py += charH;
     }
-    if (py >= (hh-400)) {
-      if (!firstPeriod) { character.innerHTML = "&nbsp;&nbsp;。"; firstPeriod = true; }
+    if (py >= (hh-(hh/5))) {
+      if (!firstPeriod) { character.innerHTML = "&nbsp;。"; firstPeriod = true; }
       px += charW;
-      py = 300;
+      py = (hh/5);
     }
     if (Math.random() > 0.90 && !afterComma) {character.style.visibility = "hidden"; afterComma = false;}
     else if (!punc && Math.random() > 0.98) {character.innerHTML = "&nbsp;&nbsp;，"; afterComma = true;}
-    // else if (last) character.innerHTML = "&nbsp;&nbsp;。";
     else afterComma = false;
     container.appendChild(character);
   }
 
   fetch("https://annaylin.com/100-days/sunmoonsky/radicals.json").then((r) => r.json()).then((r) => {
-    const numChars = Math.floor((((ww-200)/(charW*1.5))*((hh-600)/(charH*1.5))));
+    const numChars = Math.floor((((ww-(ww/5))/(charW*1.75))*((hh-(hh/5))/(charH*1.75))));
     for (let _ = 0; _ < numChars; _++) {
       makeCharacter(r, _==(numChars-1)||_==0);
     }
