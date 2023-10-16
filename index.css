@@ -23,24 +23,12 @@ body {
 
 #container {
   display: flex;
+  flex-flow: column wrap;
+}
+
+p {
+  display: flex;
   justify-content: center;
-  align-items: center;
-  flex-flow: column;
-}
-
-a {
-  display: block;
   font-size: 48px;
-  line-height: 26px;
-  /* -webkit-box-reflect: right; */
-  position: absolute;
-  cursor: pointer;
-  /* margin: 2px; */
+  writing-mode: vertical-rl;
 }
-
-/* a:hover, a:visited {
-  -webkit-box-reflect: unset;
-  color: rgb(0, 255, 0);
-  transform: none;
-  font-size: 20px;
-} */

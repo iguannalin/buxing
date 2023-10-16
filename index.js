@@ -8,19 +8,20 @@ window.addEventListener("load", () => {
   const container = document.getElementById("container");
   function makeCharacter(radicals) {
     let sc = 0;
-    const character = document.createElement("div");
+    const character = document.createElement("tr");
+    const td = document.createElement("td");
     for (let _ = 0; _ < 2; _++) {
       let ch = radicals[getRandomInt(0, radicals.length)];
       for (let __ = 0; __ < 1; __++) {
-        const node = document.createElement("p");
+        const node = document.createElement("span");
         node.innerText = ch;
-        console.log({sc});
-        node.style.paddingRight = (sc*40) + "px";
+        node.style.paddingRight = (sc*45) + "px";
         sc = Math.max(0.1, Math.random());
         node.style.transform = `scale(${sc},1)`;
-        character.appendChild(node);
+        td.appendChild(node);
       }
     }
+    character.appendChild(td);
     container.appendChild(character);
   }
 
