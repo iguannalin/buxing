@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
   let py = 300;
   let charW = 40;
   let charH = 18;
+  let afterComma = false;
 
   const container = document.getElementById("container");
   function makeCharacter(radicals, last = false) {
@@ -33,9 +34,10 @@ window.addEventListener("load", () => {
       px += charW;
       py = 300;
     }
-    if (Math.random() > 0.90) character.style.visibility = "hidden";
-    else if (Math.random() > 0.95) character.innerHTML = "&nbsp;&nbsp;，";
+    if (Math.random() > 0.90 && !afterComma) {character.style.visibility = "hidden"; afterComma = false;}
+    else if (Math.random() > 0.95) {character.innerHTML = "&nbsp;&nbsp;，"; afterComma = true;}
     else if (last) character.innerHTML = "&nbsp;&nbsp;。";
+    else afterComma = false;
     container.appendChild(character);
   }
 
